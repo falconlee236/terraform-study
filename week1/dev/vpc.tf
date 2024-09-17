@@ -16,6 +16,6 @@ module "vpc" {
   # public ip를 매핑할 것인지 여부
   map_public_ip_on_launch = true
 
-  # 자동으로 인터넷 게이트웨이를 생성하지 않게 설정
-  create_igw = false
+  # 자동으로 인터넷 게이트웨이를 생성
+  create_igw = true
 }

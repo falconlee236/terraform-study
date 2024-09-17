@@ -12,4 +12,8 @@ resource "aws_instance" "ec2_instance" {
     sudo apt update -y
     sudo apt upgrade -y
   EOF
+
+  tags = {
+    Name = "${var.project_name}-${var.target_label}-ec2"
+  }
 }
