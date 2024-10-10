@@ -4,8 +4,8 @@ resource "google_compute_instance" "gpu_instance" {
     name = "training-worker-gpu-instance"
     // use variables to configure different values
     // 4 virtual gpus and 15GB memory
-    machine_type = "nl-standard-4"
-    zone = "us-central1-a"
+    machine_type = var.machine_type
+    zone = var.zone
 
     tags = [ "ssh-enabled" ]
 
@@ -20,7 +20,7 @@ resource "google_compute_instance" "gpu_instance" {
 
     // add a single nvidia T4 GPU
     guest_accelerator {
-        type = "nivida-tesla-t4"
+        type = var.gpu_type
         count = 1
     }
 
@@ -41,6 +41,7 @@ resource "google_compute_instance" "gpu_instance" {
 
     network_interface {
         network = "rl-vpc-network"
+        subnetwork = "my-custom-subnet"
         access_config {
             // Ephemeral IP
         }
